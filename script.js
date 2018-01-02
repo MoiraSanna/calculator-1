@@ -8,40 +8,23 @@ function buttonPressed(e, button=undefined) {
   button = button || e.target;
   let text = button.textContent;
 
-  if (Number.isInteger(Number(text)) || text === ".") {
-    displayValue += button.textContent;
-  } else if (text == "+" || text == "-" || text == "*" || text == "/") {
-    operator = getOperator(text);
-    firstNumber = displayValue;
-    displayValue += ` ${text} `;
-  } else if (text === "=" && operator) {
-    secondNumber = displayValue.substring(3 + firstNumber.length);
-    if (operator === divide && !secondNumber) {
-      displayValue = "Math ERROR";
-    } else {
-      displayValue = String(Math.round(operate(operator, Number(firstNumber), Number(secondNumber)) * 1000000) / 1000000);
-    }
-    operator = null;
-    firstNumber = null;
-    secondNumber = null;
+  if (Number.isInteger(Number(text)) || text === "+"  || text === "-"  || text === "*"  || text === "/" || text === ".") {
+    displayValue += text;
   } else if (text === "AC") {
-    operator = null;
-    firstNumber = null;
-    secondNumber = null;
     displayValue = "";
   } else if (text === "DEL") {
-    if (displayValue[displayValue.length - 1] === " ") {
-      displayValue = displayValue.substr(0, displayValue.length - 3);
-      operator = null;
-      firstNumber = null;
-    } else {
-      displayValue = displayValue.substr(0, displayValue.length - 1);
-    }
+    displayValue = displayValue.substr(0, displayValue.length - 1);
+  } else if (text === "=") {
+    displayValue = calculate(displayValue);
   }
 
   display.textContent = displayValue;
   button.classList.add("clicked");
   button.addEventListener("transitionend", removeClickedClass);
+}
+
+function calculate(string) {
+  console.log(string);
 }
 
 function getOperator(operatorString) {
@@ -60,7 +43,6 @@ function getOperator(operatorString) {
       break;
   }
 }
-
 
 function removeClickedClass(e) {
   e.target.classList.remove("clicked");
@@ -90,9 +72,6 @@ function keyPressed(e) {
 // ********************************
 
 let displayValue = "";
-let firstNumber;
-let secondNumber;
-let operator;
 
 let display = document.querySelector(".display-text");
 
