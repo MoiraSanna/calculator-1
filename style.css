@@ -37,6 +37,9 @@
   vertical-align: middle;
   display: inline-block;
   line-height: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 400px;
 }
 
 .keyboard {
@@ -86,4 +89,17 @@
 
 .button:focus {
   outline: none;
+}
+
+p {
+  width: 250px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(13, 13, 13);
+  color: rgb(242, 242, 242);
+  border: 5px outset rgb(38, 38, 38);
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
